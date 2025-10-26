@@ -1,4 +1,4 @@
-// ----- Generate HTML ----- 
+// ----- Generate HTML -----
 const container = document.getElementById("ownersContainer");
 
 owners.forEach(o => {
@@ -37,10 +37,10 @@ owners.forEach(o => {
 
   section.innerHTML = `
     <div class="owner-img">
-      <img src="${o.ownerImg}" alt="${o.name}" loading="lazy">
+      <img src="${o.ownerImg}" alt="${o.name}" loading="lazy" onerror="this.style.display='none'">
     </div>
     <div class="pegboard-wrapper">
-      <img src="${o.pegboardImg}" alt="Pegboard ${o.name}" class="pegboard" loading="lazy">
+      <img src="${o.pegboardImg}" alt="Pegboard ${o.name}" class="pegboard" loading="lazy" onerror="this.style.display='none'">
       <button class="playSpotify"
               style="bottom:${o.headphonePos.bottom}; right:${o.headphonePos.right};"></button>
       ${photostripButtons}
@@ -52,33 +52,28 @@ owners.forEach(o => {
 });
 
 
-// ✅ ----- Preload all images to make carousel smoother -----
+// ✅ ----- Preload all images safely -----
 const preloadImages = () => {
   const allImgs = [];
 
   owners.forEach(o => {
     allImgs.push(o.ownerImg, o.pegboardImg);
-
-    if (o.photostrips) {
-      o.photostrips.forEach(strip => allImgs.push(strip.img));
-    }
-
-    if (o.photoframes) {
-      o.photoframes.forEach(frame => allImgs.push(frame.img));
-    } else if (o.photoframe) {
-      allImgs.push(o.photoframe);
-    }
+    if (o.photostrips) o.photostrips.forEach(strip => allImgs.push(strip.img));
+    if (o.photoframes) o.photoframes.forEach(frame => allImgs.push(frame.img));
+    else if (o.photoframe) allImgs.push(o.photoframe);
   });
 
+  // Preload each image with onerror check to prevent protocol spam
   allImgs.forEach(src => {
     const img = new Image();
     img.src = src;
+    img.onload = () => console.log(`✅ Loaded: ${src}`);
+    img.onerror = () => console.warn(`⚠️ Missing or invalid: ${src}`);
   });
 };
 
-// Run preload after the page fully loads
+// Run preload after page fully loads
 window.addEventListener("load", preloadImages);
-
 
 
 // ----- Carousel Logic -----
@@ -100,7 +95,6 @@ document.getElementById("prevBtn").addEventListener("click", () => {
 });
 
 
-
 // ----- Spotify Logic -----
 const spotifyContainer = document.getElementById("spotifyContainer");
 const spotifyPlayer = document.getElementById("spotifyPlayer");
@@ -119,7 +113,7 @@ document.addEventListener("click", e => {
     // Always show + un-minimize the player
     spotifyContainer.style.display = "block";
     spotifyContainer.classList.remove("minimized");
-    toggleBtn.textContent = "–"; // set back to expanded icon
+    toggleBtn.textContent = "–";
   }
 });
 
@@ -127,7 +121,6 @@ toggleBtn.addEventListener("click", () => {
   spotifyContainer.classList.toggle("minimized");
   toggleBtn.textContent = spotifyContainer.classList.contains("minimized") ? "+" : "–";
 });
-
 
 
 // ----- Photo Modal Logic -----
@@ -143,40 +136,16 @@ document.addEventListener("click", e => {
   const clickedSrc = e.target.dataset.src;
   const clickedType = e.target.dataset.type;
 
-  modalContent.innerHTML = ""; // Clear previous images
+  modalContent.innerHTML = ""; // Clear previous
 
-  // ✅ List of owners that have multiple photostrips
   const multiPhotoOwners = [
-    "miwaluvsy",
-    "mephistomum",
-    "snowfllay",
-    "miffymoch",
-    "Syreenie",
-    "catsyIus",
-    "alyaa_ayo",
-    "ArcaneVix",
-    "snowyplli",
-    "maiappleb",
-    "taeohbeng",
-    "DearLoveLily",
-    "irnemin",
-    "sylusplume",
-    "Ryuno_Aika",
-    "xinghuiatus",
-    "haujux",
-    "cremezayniee",
-    "shenliquor",
-    "Dew_Lus",
-    "missapplelle",
-    "galaxyboo_",
-    "acahthzzn",
-    "5y1u541ife",
-    "rafayelpregnant",
-    "ai00_rin",
-    "applecrow_lover"
+    "miwaluvsy", "mephistomum", "snowfllay", "miffymoch", "Syreenie", "catsyIus",
+    "alyaa_ayo", "ArcaneVix", "snowyplli", "maiappleb", "taeohbeng", "DearLoveLily",
+    "irnemin", "sylusplume", "Ryuno_Aika", "xinghuiatus", "haujux", "cremezayniee",
+    "shenliquor", "Dew_Lus", "missapplelle", "galaxyboo_", "acahthzzn", "5y1u541ife",
+    "rafayelpregnant", "ai00_rin", "applecrow_lover"
   ];
 
-  // ✅ Show all photostrips for certain owners
   if (clickedType === "strip" && multiPhotoOwners.includes(ownerName)) {
     const owner = owners.find(o => o.name === ownerName);
     if (owner?.photostrips) {
@@ -184,27 +153,24 @@ document.addEventListener("click", e => {
         const img = document.createElement("img");
         img.src = strip.img;
         img.alt = "Photo";
-        img.loading = "lazy"; 
+        img.loading = "lazy";
+        img.onerror = () => (img.style.display = "none");
         modalContent.appendChild(img);
       });
     }
-  } 
-  // ✅ Default: show single photo
-  else {
+  } else {
     const img = document.createElement("img");
     img.src = clickedSrc;
     img.alt = "Photo";
-    img.loading = "lazy"; 
+    img.loading = "lazy";
+    img.onerror = () => (img.style.display = "none");
     modalContent.appendChild(img);
   }
 
   modal.style.display = "flex";
 });
 
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
+closeModal.addEventListener("click", () => (modal.style.display = "none"));
 modal.addEventListener("click", e => {
   if (e.target === modal) modal.style.display = "none";
 });
