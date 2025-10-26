@@ -23,7 +23,7 @@ owners.forEach(o => {
   section.className = "owner-section";
   section.dataset.track = o.track;
 
-  if (["ArcaneVix", "Shayma9749", "solemyst_twt", "MochiMeowllow", "xinghuiatus", "SylRafZayXavCal"].includes(o.name)) {
+  if (["arcanevix", "shayma9749", "solemyst_twt", "mochimeowllow", "xinghuiatus", "sylrafzayxavcal"].includes(o.name)) {
     section.classList.add("behind-pegboard");
   }
 
@@ -156,11 +156,12 @@ document.addEventListener("click", e => {
   modalContent.innerHTML = ""; // Clear previous
 
   const multiPhotoOwners = [
-    "miwaluvsy", "mephistomum", "snowfllay", "miffymoch", "Syreenie", "catsyIus",
-    "alyaa_ayo", "ArcaneVix", "snowyplli", "maiappleb", "taeohbeng", "DearLoveLily",
-    "irnemin", "sylusplume", "Ryuno_Aika", "xinghuiatus", "haujux", "cremezayniee",
-    "shenliquor", "Dew_Lus", "missapplelle", "galaxyboo_", "acahthzzn", "5y1u541ife",
-    "rafayelpregnant", "ai00_rin", "applecrow_lover"
+  "miwaluvsy", "mephistomum", "snowfllay", "miffymoch", "syreenie", "catsylus",
+"alyaa_ayo", "arcanevix", "snowyplli", "maiappleb", "taeohbeng", "dearlovelily",
+"irnemin", "sylusplume", "ryuno_aika", "xinghuiatus", "haujux", "cremezayniee",
+"shenliquor", "dew_lus", "missapplelle", "galaxyboo_", "acahthzzn", "5y1u541ife",
+"rafayelpregnant", "ai00_rin", "applecrow_lover"
+
   ];
 
   if (clickedType === "strip" && multiPhotoOwners.includes(ownerName)) {
