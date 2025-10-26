@@ -2,6 +2,23 @@
 const container = document.getElementById("ownersContainer");
 
 owners.forEach(o => {
+  // ✅ Normalize all image-related filenames to lowercase
+  if (o.ownerImg) o.ownerImg = o.ownerImg.toLowerCase();
+  if (o.pegboardImg) o.pegboardImg = o.pegboardImg.toLowerCase();
+  if (o.photoframe) o.photoframe = o.photoframe.toLowerCase();
+  if (Array.isArray(o.photoframes)) {
+    o.photoframes = o.photoframes.map(frame => ({
+      ...frame,
+      img: frame.img.toLowerCase()
+    }));
+  }
+  if (Array.isArray(o.photostrips)) {
+    o.photostrips = o.photostrips.map(strip => ({
+      ...strip,
+      img: strip.img.toLowerCase()
+    }));
+  }
+
   const section = document.createElement("div");
   section.className = "owner-section";
   section.dataset.track = o.track;
