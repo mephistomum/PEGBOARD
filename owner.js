@@ -82,16 +82,16 @@ const owners = [
   }
   ,
   {
-    name: "catsyIus",
-    ownerImg: "assets/image/owner/catsyIus.png",
-    pegboardImg: "assets/image/pegboard/catsyIus.png",
+    name: "catsylus",
+    ownerImg: "assets/image/owner/catsylus.png",
+    pegboardImg: "assets/image/pegboard/catsylus.png",
     track: "https://open.spotify.com/embed/track/6Qyc6fS4DsZjB2mRW9DsQs?utm_source=generator",
     headphonePos: { bottom: "27vw", right: "7.5vw" },
     photostrips: [
-      { img: "assets/image/photostrip/catsyIus1.png", pos: { bottom: "33vw", left: "4.5vw" } },
-      { img: "assets/image/photostrip/catsyIus2.png", pos: { bottom: "28vw", left: "-0.5vw" } }
+      { img: "assets/image/photostrip/catsylus1.png", pos: { bottom: "33vw", left: "4.5vw" } },
+      { img: "assets/image/photostrip/catsylus2.png", pos: { bottom: "28vw", left: "-0.5vw" } }
     ],
-    photoframe: "assets/image/photoframe/catsyIus.jpg",
+    photoframe: "assets/image/photoframe/catsylus.jpg",
     photoframePos: { bottom: "2vw", right: "8vw" }
   }
   ,
@@ -643,17 +643,17 @@ const owners = [
 },
 
   {
-    name: "fighterpiIots",
-    ownerImg: "assets/image/owner/fighterpiIots.png",
-    pegboardImg: "assets/image/pegboard/fighterpiIots.png",
+    name: "fighterpilots",
+    ownerImg: "assets/image/owner/fighterpilots.png",
+    pegboardImg: "assets/image/pegboard/fighterpilots.png",
     track: "https://open.spotify.com/embed/track/7k2SCAJzg4FaAN4da2cOxW?utm_source=generator",
     headphonePos: { bottom: "21vw", right: "28.5vw" },
     photostrips: [
-      { img: "assets/image/photostrip/fighterpiIots1.png", pos: { bottom: "12vw", left: "12vw" } },
-      { img: "assets/image/photostrip/fighterpiIots1.png", pos: { bottom: "4vw", left: "12vw" } }
+      { img: "assets/image/photostrip/fighterpilots1.png", pos: { bottom: "12vw", left: "12vw" } },
+      { img: "assets/image/photostrip/fighterpilots1.png", pos: { bottom: "4vw", left: "12vw" } }
       
     ],
-    photoframe: "assets/image/photoframe/fighterpiIots.jpg",
+    photoframe: "assets/image/photoframe/fighterpilots.jpg",
     photoframePos: { bottom: "33vw", right: "7vw" }
   },
   {
